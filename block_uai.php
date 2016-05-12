@@ -616,30 +616,30 @@ if($COURSE->id == 1){
 		
 	}
 
-	function ayudantes(){ //This function shows 
+	function ayudantes(){ //This function creates a link to "ayudantes" plugin 
 	
 		global $CFG, $PAGE;
 	
-		if($CFG->block_uai_local_modules && !in_array('facebook',explode(',',$CFG->block_uai_local_modules))) {
-			return false;
+		if($CFG->block_uai_local_modules && !in_array('ayudantes',explode(',',$CFG->block_uai_local_modules))) {
+			return false; //"ayudantes" will only appear if its enabled at block_uai configuration
 		}
 		$course = $PAGE->course;
 		$context = $PAGE->context;
 		if(!$course || !has_capability('mod/emarking:supervisegrading', $context) || $course->id <= 1)
-			return false;
+			return false;//"ayudantes" will only appear on a course where the user is a teacher
 		
 		$nodo_mis_ayudantes = navigation_node::create(
 				get_string('myhelpers', 'block_uai'),
 				new moodle_url("/local/ayudantes/misayudantes.php"),
 				navigation_node::TYPE_CUSTOM,
-				null, null);	
+				null, null); //Here we define the sub node "mis ayudantes" which we press to access the plugin
 	
-		$rootnode = navigation_node::create(get_string('helpers', 'block_uai'));
+		$rootnode = navigation_node::create(get_string('helpers', 'block_uai')); //This creates de new node "ayudantes" on the block
 	
 		$context = context_system::instance();
 	
-		$rootnode->add_node($nodo_mis_ayudantes);
-		return $rootnode;
+		$rootnode->add_node($nodo_mis_ayudantes); //We use this command to make use of the sub node "mis ayudates"
+		return $rootnode; //With this we make visible the whole "ayudantes" node
 	}	
 
 	public function get_content() {
