@@ -49,3 +49,5 @@ $string['calculator'] = 'Average';
 $string['viewuserreserves']="View user reserves";
 $string['diagnostic']="Diagnostic";
 $string['upload']="Upload";
+$string['myhelpers']="My helpers";
+$string['helpers']="Helpers";

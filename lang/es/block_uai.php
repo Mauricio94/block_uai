@@ -49,4 +49,5 @@ $string['statistics']="Estadísticas";
 $string['viewuserreserves']="Ver reservas por usuario";
 $string['diagnostic']="Diagnóstico";
 $string['upload']="Upload";
-
+$string['myhelpers']="Mis ayudantes";
+$string['helpers']="Ayudantes";

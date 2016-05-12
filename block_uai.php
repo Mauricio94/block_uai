@@ -616,10 +616,36 @@ if($COURSE->id == 1){
 		
 	}
 
+	function ayudantes(){ //This function shows 
+	
+		global $CFG, $PAGE;
+	
+		if($CFG->block_uai_local_modules && !in_array('facebook',explode(',',$CFG->block_uai_local_modules))) {
+			return false;
+		}
+		$course = $PAGE->course;
+		$context = $PAGE->context;
+		if(!$course || !has_capability('mod/emarking:supervisegrading', $context) || $course->id <= 1)
+			return false;
+		
+		$nodo_mis_ayudantes = navigation_node::create(
+				get_string('myhelpers', 'block_uai'),
+				new moodle_url("/local/ayudantes/misayudantes.php"),
+				navigation_node::TYPE_CUSTOM,
+				null, null);	
+	
+		$rootnode = navigation_node::create(get_string('helpers', 'block_uai'));
+	
+		$context = context_system::instance();
+	
+		$rootnode->add_node($nodo_mis_ayudantes);
+		return $rootnode;
+	}	
+
 	public function get_content() {
 		global $DB, $USER, $CFG, $COURSE, $PAGE;
 			
-		if ($this->content !== null) { //si el contenido ya esta generado, no se genera una 2� vez
+		if ($this->content !== null) { //si el contenido ya esta generado, no se genera una 2? vez
 			return $this->content;
 		}
 
@@ -639,7 +665,7 @@ if($COURSE->id == 1){
 				null,
 				null);
 
-		if($nodereservasalas = $this->reserva_salas())
+/*		if($nodereservasalas = $this->reserva_salas())
 			$root->add_node($nodereservasalas);
 		
 		if($nodeasistencias = $this->asistencias())
@@ -659,7 +685,10 @@ if($COURSE->id == 1){
 
 		if($nodetoolbox = $this->toolbox())
 			$root->add_node($nodetoolbox);
-
+*/
+		if($nodeayudantes = $this->ayudantes())
+			$root->add_node($nodeayudantes);
+		
 		$renderer = $this->page->get_renderer('block_uai');
 		$this->content->text = $renderer->uai_tree($root);
 		$this->content->footer = '';
