@@ -630,7 +630,7 @@ if($COURSE->id == 1){
 		
 		$nodo_mis_ayudantes = navigation_node::create(
 				get_string('myhelpers', 'block_uai'),
-				new moodle_url("/local/ayudantes/misayudantes.php"),
+				new moodle_url("/local/ayudantes/ayudantes.php"),
 				navigation_node::TYPE_CUSTOM,
 				null, null); //Here we define the sub node "mis ayudantes" which we press to access the plugin
 	
